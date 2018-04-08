@@ -47,6 +47,29 @@ public class DBPediaRequestQueryString {
 	            + "} LIMIT "+limit);
 	}
 	
+	public static ParameterizedSparqlString level2_4(String name, int limit) { 
+		return new ParameterizedSparqlString(""
+				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+	            + "PREFIX dbp:  <http://dbpedia.org/property/>\n"
+	            + "PREFIX dbo:  <http://dbpedia.org/ontology/>\n"
+	            + "PREFIX rel:  <http://purl.org/vocab/relationship>\n"
+	            + "CONSTRUCT { "
+	            + "?person foaf:name ?name ."
+	            + "?person dbo:birthDate ?birth ."
+	            + "?person rel:spouseOf ?spouse ."
+	            + "?person rel:childOf ?parent ."
+	            + "?person rel:parentOf ?children. }"
+	            + "WHERE {"
+	            + "?person foaf:name ?name ."
+	            + "?person foaf:name \""+name+"\"@en."
+	            + "?person dbo:birthDate ?birth ."
+	            + "?person dbp:spouses ?spouse ."
+	            + "?person dbo:parent ?parent ."
+	            + "?person dbp:issue ?children. "
+	            + "FILTER (LANG(?name) = 'en') ."
+	            + "} LIMIT "+limit);
+	}
+	
 	public static ParameterizedSparqlString level2_3(String name, int limit) { 
 		return new ParameterizedSparqlString(""
 				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
@@ -85,6 +108,44 @@ public class DBPediaRequestQueryString {
 	            + "?person foaf:name \""+name+"\"@en."
 	            + "?person dbo:birthDate ?birth ."
 	            + "?person dbo:spouse ?spouse ."
+	            + "FILTER (LANG(?name) = 'en') ."
+	            + "} LIMIT "+limit);
+	}
+	
+	public static ParameterizedSparqlString level2_6(String name, int limit) { 
+		return new ParameterizedSparqlString(""
+				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+	            + "PREFIX dbp:  <http://dbpedia.org/property/>\n"
+	            + "PREFIX dbo:  <http://dbpedia.org/ontology/>\n"
+	            + "PREFIX rel:  <http://purl.org/vocab/relationship>\n"
+	            + "CONSTRUCT { "
+	            + "?person foaf:name ?name ."
+	            + "?person dbo:birthDate ?birth ."
+	            + "?person rel:spouseOf ?spouse .}"
+	            + "WHERE {"
+	            + "?person foaf:name ?name ."
+	            + "?person foaf:name \""+name+"\"@en."
+	            + "?person dbo:birthDate ?birth ."
+	            + "?person dbp:spouse ?spouse ."
+	            + "FILTER (LANG(?name) = 'en') ."
+	            + "} LIMIT "+limit);
+	}
+	
+	public static ParameterizedSparqlString level2_5(String name, int limit) { 
+		return new ParameterizedSparqlString(""
+				+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\n"
+	            + "PREFIX dbp:  <http://dbpedia.org/property/>\n"
+	            + "PREFIX dbo:  <http://dbpedia.org/ontology/>\n"
+	            + "PREFIX rel:  <http://purl.org/vocab/relationship>\n"
+	            + "CONSTRUCT { "
+	            + "?person foaf:name ?name ."
+	            + "?person dbo:birthDate ?birth ."
+	            + "?person rel:spouseOf ?spouse .}"
+	            + "WHERE {"
+	            + "?person foaf:name ?name ."
+	            + "?person foaf:name \""+name+"\"@en."
+	            + "?person dbp:birthDate ?birth ."
+	            + "?person dbp:spouse ?spouse ."
 	            + "FILTER (LANG(?name) = 'en') ."
 	            + "} LIMIT "+limit);
 	}
